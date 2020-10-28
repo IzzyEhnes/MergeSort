@@ -246,25 +246,21 @@ class LList
                 System.out.println("NULL");
             }
         }
-        
+
         System.out.println("Left is empty?: " + left.isEmpty());
         System.out.println("Right is empty?: " + right.isEmpty());
 
-        /*
-        while (leftCurrent != null)
+        while (!left.isEmpty())
         {
-            result.add(leftCurrent.getValue());
-            left.delete(leftCurrent.getValue());
-            leftCurrent = leftCurrent.getNext();
+            result.add(left.head.getValue());
+            left.delete(left.head.getValue());
         }
 
-        while (rightCurrent != null)
+        while (!right.isEmpty())
         {
-            result.add(rightCurrent.getValue());
-            right.delete(rightCurrent.getValue());
-            rightCurrent = rightCurrent.getNext();
+            result.add(right.head.getValue());
+            right.delete(right.head.getValue());
         }
-         */
 
         System.out.println("Result: ");
         result.traverse();
