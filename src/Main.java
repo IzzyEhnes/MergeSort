@@ -170,17 +170,23 @@ class LList
 
 
 
-    void split(LList inList1, LList inList2)
+    void split(LList list1, LList list2)
     {
-        int splitSize = inList1.getListSize() / 2;
+        LList inList = this;
+
+        int splitSize = inList.getListSize() / 2;
 
         int nodeCount = 1;
-        for (Node current = inList1.head; current != null; current = current.getNext())
+        for (Node current = inList.head; current != null; current = current.getNext())
         {
-            if (nodeCount == splitSize)
+            if (nodeCount > splitSize)
             {
-                inList2.head = current.getNext();
-                current.setNext(null);
+                list2.add(current.getValue());
+            }
+
+            else
+            {
+                list1.add(current.getValue());
             }
 
             nodeCount++;
@@ -192,12 +198,6 @@ class LList
     LList merge(LList left, LList right)
     {
         LList result = new LList();
-
-        System.out.println("left: ");
-        left.traverse();
-
-        System.out.println("\nright: ");
-        right.traverse();
 
         if (left.head == null)
         {
@@ -242,11 +242,6 @@ class LList
             rightCurrent = rightCurrent.getNext();
         }
 
-        System.out.println("\nMerge result: ");
-        result.traverse();
-
-        System.out.println("**********");
-
         return result;
     }
 
@@ -264,16 +259,26 @@ class LList
             return inList;
         }
 
-
-        LList left = inList;
+        LList left = new LList();
         LList right = new LList();
 
-        split(left, right);
+        inList.split(left, right);
+
+        System.out.println("\nleft: ");
+        left.traverse();
+
+        System.out.println("\nright: ");
+        right.traverse();
 
         left = mergeSort(left);
         right = mergeSort(right);
 
         inList = merge(left, right);
+
+        System.out.println("\nMerge result: ");
+        inList.traverse();
+
+        System.out.println("**********");
 
         return inList;
     }
@@ -293,20 +298,28 @@ class Driver
         //int[] intArray = {5, 1, 4, 2, 6, 3};
         int[] intArray = {5, 1, 8, 3};
 
-	    LList list1 = new LList();
+	    LList list = new LList();
 
 
 	    for (int i = 0; i < intArray.length; i++)
         {
-            list1.add(intArray[i]);
+            list.add(intArray[i]);
         }
 
-	    list1.traverse();
         LList list2 = new LList();
-        //list1.split(list1, list2);
-	    list1 = list1.mergeSort(list1);
+	    LList list1 = new LList();
 
-	    System.out.println("\nRESULT:");
-	    list1.traverse();
+	    /*
+        list.split(list1, list2);
+        System.out.println("list1:");
+        list1.traverse();
+        System.out.println("list2:");
+        list2.traverse();
+	     */
+
+	    //list1 = list1.mergeSort(list1);
+
+	    //System.out.println("\nRESULT:");
+	    //list1.traverse();
     }
 }
