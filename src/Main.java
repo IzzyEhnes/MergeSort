@@ -197,6 +197,12 @@ class LList
 
     LList merge(LList left, LList right)
     {
+        System.out.println("\nleft: ");
+        left.traverse();
+
+        System.out.println("\nright: ");
+        right.traverse();
+
         LList result = new LList();
 
         if (left.head == null)
@@ -209,11 +215,13 @@ class LList
             return left;
         }
 
-        Node leftCurrent = new Node(left.head.getValue());
-        Node rightCurrent = new Node(right.head.getValue());
-
+        Node leftCurrent = left.head;
+        Node rightCurrent = right.head;
         while (leftCurrent != null && rightCurrent != null)
         {
+            System.out.println("leftCurrent: " + leftCurrent.getValue());
+            System.out.println("rightCurrent: " + rightCurrent.getValue());
+
             if (leftCurrent.getValue() < rightCurrent.getValue())
             {
                 result.add(leftCurrent.getValue());
@@ -228,6 +236,11 @@ class LList
 
             rightCurrent = rightCurrent.getNext();
             leftCurrent = leftCurrent.getNext();
+
+            if (leftCurrent == null || rightCurrent == null)
+            {
+                System.out.println("NULL");
+            }
         }
 
         while (leftCurrent != null)
@@ -263,12 +276,6 @@ class LList
         LList right = new LList();
 
         inList.split(left, right);
-
-        System.out.println("\nleft: ");
-        left.traverse();
-
-        System.out.println("\nright: ");
-        right.traverse();
 
         left = mergeSort(left);
         right = mergeSort(right);
@@ -317,9 +324,6 @@ class Driver
         list2.traverse();
 	     */
 
-	    //list1 = list1.mergeSort(list1);
-
-	    //System.out.println("\nRESULT:");
-	    //list1.traverse();
+	    list.mergeSort(list);
     }
 }
