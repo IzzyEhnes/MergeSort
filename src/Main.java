@@ -139,6 +139,13 @@ class LList
 
 
 
+    boolean isEmpty()
+    {
+        return this.head == null;
+    }
+
+
+
     void delete(int inValue)
     {
         Node current = new Node();
@@ -219,19 +226,16 @@ class LList
         Node rightCurrent = right.head;
         while (leftCurrent != null && rightCurrent != null)
         {
-            System.out.println("leftCurrent: " + leftCurrent.getValue());
-            System.out.println("rightCurrent: " + rightCurrent.getValue());
-
-            if (leftCurrent.getValue() < rightCurrent.getValue())
+            if (leftCurrent.getValue() > rightCurrent.getValue())
             {
-                result.add(leftCurrent.getValue());
                 result.add(rightCurrent.getValue());
+                right.delete(rightCurrent.getValue());
             }
 
             else
             {
-                result.add(rightCurrent.getValue());
                 result.add(leftCurrent.getValue());
+                left.delete(leftCurrent.getValue());
             }
 
             rightCurrent = rightCurrent.getNext();
@@ -242,18 +246,28 @@ class LList
                 System.out.println("NULL");
             }
         }
+        
+        System.out.println("Left is empty?: " + left.isEmpty());
+        System.out.println("Right is empty?: " + right.isEmpty());
 
+        /*
         while (leftCurrent != null)
         {
             result.add(leftCurrent.getValue());
+            left.delete(leftCurrent.getValue());
             leftCurrent = leftCurrent.getNext();
         }
 
         while (rightCurrent != null)
         {
             result.add(rightCurrent.getValue());
+            right.delete(rightCurrent.getValue());
             rightCurrent = rightCurrent.getNext();
         }
+         */
+
+        System.out.println("Result: ");
+        result.traverse();
 
         return result;
     }
@@ -302,8 +316,8 @@ class Driver
     public static void main(String[] args)
     {
 	    //int[] intArray = {32, 17, 109, 78, 2, 93, 60, 51, 176, 24, 88, 13, 120, 49, 158};
-        //int[] intArray = {5, 1, 4, 2, 6, 3};
-        int[] intArray = {5, 1, 8, 3};
+        int[] intArray = {5, 1, 4, 2, 6, 3};
+        //int[] intArray = {5, 1, 8, 3};
 
 	    LList list = new LList();
 
@@ -312,9 +326,6 @@ class Driver
         {
             list.add(intArray[i]);
         }
-
-        LList list2 = new LList();
-	    LList list1 = new LList();
 
 	    /*
         list.split(list1, list2);
@@ -325,5 +336,6 @@ class Driver
 	     */
 
 	    list.mergeSort(list);
+
     }
 }
