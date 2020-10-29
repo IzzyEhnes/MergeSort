@@ -236,6 +236,7 @@ class LList
             {
                 result.add(rightCurrent.getValue());
                 right.delete(rightCurrent.getValue());
+
                 result.add(leftCurrent.getValue());
                 left.delete(leftCurrent.getValue());
             }
@@ -244,6 +245,7 @@ class LList
             {
                 result.add(leftCurrent.getValue());
                 left.delete(leftCurrent.getValue());
+
                 result.add(rightCurrent.getValue());
                 right.delete(rightCurrent.getValue());
             }
@@ -257,15 +259,47 @@ class LList
             }
         }
 
+        System.out.println("left.isEmpty(): " + left.isEmpty());
+        System.out.println("right.isEmpty(): " + right.isEmpty());
+
         while (!left.isEmpty())
         {
-            result.add(left.head.getValue());
+            System.out.println("RESULT: ");
+            result.traverse();
+            System.out.println();
+            System.out.println("left.head.getValue: " + left.head.getValue());
+
+            for (Node current = result.head; current != null; current = current.getNext())
+            {
+                if (current.getNext() == null ||
+                        left.head.getValue() < current.getNext().getValue())
+                {
+                    Node nn = new Node(left.head.getValue());
+                    nn.setNext(current.getNext());
+                    current.setNext(nn);
+
+                    break;
+                }
+            }
+
             left.delete(left.head.getValue());
         }
 
         while (!right.isEmpty())
         {
-            result.add(right.head.getValue());
+            for (Node current = result.head; current != null; current = current.getNext())
+            {
+                if (current.getNext() == null ||
+                        right.head.getValue() < current.getNext().getValue())
+                {
+                    Node nn = new Node(right.head.getValue());
+                    nn.setNext(current.getNext());
+                    current.setNext(nn);
+
+                    break;
+                }
+            }
+
             right.delete(right.head.getValue());
         }
 
@@ -343,9 +377,6 @@ class Driver
 	    list2.traverse();
 
          */
-
-
-
 
 	    list = list.mergeSort(list);
 
