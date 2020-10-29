@@ -182,7 +182,6 @@ class LList
         LList inList = this;
 
         int splitSize = inList.getListSize() / 2;
-        System.out.println("splitSize: " + splitSize);
 
         if (inList.getListSize() % 2 == 1)
         {
@@ -210,12 +209,6 @@ class LList
 
     LList merge(LList left, LList right)
     {
-        System.out.println("\nleft: ");
-        left.traverse();
-
-        System.out.println("\nright: ");
-        right.traverse();
-
         LList result = new LList();
 
         if (left.head == null)
@@ -236,39 +229,22 @@ class LList
             {
                 result.add(rightCurrent.getValue());
                 right.delete(rightCurrent.getValue());
-
-                result.add(leftCurrent.getValue());
-                left.delete(leftCurrent.getValue());
             }
 
             else
             {
                 result.add(leftCurrent.getValue());
                 left.delete(leftCurrent.getValue());
-
-                result.add(rightCurrent.getValue());
-                right.delete(rightCurrent.getValue());
             }
 
             rightCurrent = rightCurrent.getNext();
             leftCurrent = leftCurrent.getNext();
-
-            if (leftCurrent == null || rightCurrent == null)
-            {
-                System.out.println("NULL");
-            }
         }
 
-        System.out.println("left.isEmpty(): " + left.isEmpty());
-        System.out.println("right.isEmpty(): " + right.isEmpty());
+
 
         while (!left.isEmpty())
         {
-            System.out.println("RESULT: ");
-            result.traverse();
-            System.out.println();
-            System.out.println("left.head.getValue: " + left.head.getValue());
-
             for (Node current = result.head; current != null; current = current.getNext())
             {
                 if (current.getNext() == null ||
@@ -284,6 +260,8 @@ class LList
 
             left.delete(left.head.getValue());
         }
+
+
 
         while (!right.isEmpty())
         {
@@ -302,9 +280,6 @@ class LList
 
             right.delete(right.head.getValue());
         }
-
-        System.out.println("Result: ");
-        result.traverse();
 
         return result;
     }
@@ -328,12 +303,6 @@ class LList
 
         inList.split(left, right);
 
-        System.out.println("\nleft in ms: ");
-        left.traverse();
-
-        System.out.println("\nright in ms: ");
-        right.traverse();
-
         left = mergeSort(left);
         right = mergeSort(right);
 
@@ -353,10 +322,12 @@ class Driver
 
     public static void main(String[] args)
     {
-	    //int[] intArray = {32, 17, 109, 78, 2, 93, 60, 51, 176, 24, 88, 13, 120, 49, 158};
+	    int[] intArray = {32, 17, 109, 78, 2, 93, 60, 51, 176, 24, 88, 13, 120, 49, 158};
         //int[] intArray = {5, 1, 4, 2, 6, 3};
         //int[] intArray = {5, 1, 4, 2};
-        int[] intArray = {38, 27, 43, 3, 9, 82, 10};
+        //int[] intArray = {38, 27, 43, 3, 9, 82, 10};
+        //int[] intArray = {7, 3, 2, 16, 24, 4, 11, 9};
+
 
         LList list = new LList();
 
@@ -366,20 +337,8 @@ class Driver
             list.add(intArray[i]);
         }
 
-
-        /*
-	    LList list1 = new LList();
-	    LList list2 = new LList();
-	    list.split(list1, list2);
-        System.out.println("list1:");
-	    list1.traverse();
-        System.out.println("list2:");
-	    list2.traverse();
-
-         */
-
 	    list = list.mergeSort(list);
 
-	    //list.traverse();
+	    list.traverse();
     }
 }
