@@ -182,18 +182,17 @@ class LList
         LList inList = this;
 
         int splitSize = inList.getListSize() / 2;
-
-        if (inList.getListSize() == 2)
-        {
-            splitSize--;
-        }
-
         System.out.println("splitSize: " + splitSize);
+
+        if (inList.getListSize() % 2 == 1)
+        {
+            splitSize++;
+        }
 
         int nodeCount = 1;
         for (Node current = inList.head; current != null; current = current.getNext())
         {
-            if (nodeCount > splitSize + 1)
+            if (nodeCount > splitSize)
             {
                 list2.add(current.getValue());
             }
@@ -237,12 +236,16 @@ class LList
             {
                 result.add(rightCurrent.getValue());
                 right.delete(rightCurrent.getValue());
+                result.add(leftCurrent.getValue());
+                left.delete(leftCurrent.getValue());
             }
 
             else
             {
                 result.add(leftCurrent.getValue());
                 left.delete(leftCurrent.getValue());
+                result.add(rightCurrent.getValue());
+                right.delete(rightCurrent.getValue());
             }
 
             rightCurrent = rightCurrent.getNext();
@@ -253,9 +256,6 @@ class LList
                 System.out.println("NULL");
             }
         }
-
-        System.out.println("Left is empty?: " + left.isEmpty());
-        System.out.println("Right is empty?: " + right.isEmpty());
 
         while (!left.isEmpty())
         {
@@ -305,11 +305,6 @@ class LList
 
         inList = merge(left, right);
 
-        System.out.println("\nMerge result: ");
-        inList.traverse();
-
-        System.out.println("**********");
-
         return inList;
     }
 }
@@ -326,9 +321,10 @@ class Driver
     {
 	    //int[] intArray = {32, 17, 109, 78, 2, 93, 60, 51, 176, 24, 88, 13, 120, 49, 158};
         //int[] intArray = {5, 1, 4, 2, 6, 3};
-        int[] intArray = {5, 1};
+        //int[] intArray = {5, 1, 4, 2};
+        int[] intArray = {38, 27, 43, 3, 9, 82, 10};
 
-	    LList list = new LList();
+        LList list = new LList();
 
 
 	    for (int i = 0; i < intArray.length; i++)
@@ -337,6 +333,7 @@ class Driver
         }
 
 
+        /*
 	    LList list1 = new LList();
 	    LList list2 = new LList();
 	    list.split(list1, list2);
@@ -345,8 +342,13 @@ class Driver
         System.out.println("list2:");
 	    list2.traverse();
 
+         */
 
-	    //list.mergeSort(list);
 
+
+
+	    list = list.mergeSort(list);
+
+	    //list.traverse();
     }
 }
