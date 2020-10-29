@@ -115,9 +115,12 @@ class LList
 
     void traverse()
     {
-        for (Node current = head; current != null; current = current.getNext())
+        if (head != null)
         {
-            System.out.println(current.getValue());
+            for (Node current = head; current != null; current = current.getNext())
+            {
+                System.out.println(current.getValue());
+            }
         }
     }
 
@@ -324,21 +327,32 @@ class Driver
     {
 	    int[] intArray = {32, 17, 109, 78, 2, 93, 60, 51, 176, 24, 88, 13, 120, 49, 158};
         //int[] intArray = {5, 1, 4, 2, 6, 3};
-        //int[] intArray = {5, 1, 4, 2};
+        //int[] intArray = {2, 3, 1};
         //int[] intArray = {38, 27, 43, 3, 9, 82, 10};
         //int[] intArray = {7, 3, 2, 16, 24, 4, 11, 9};
+        //int[] intArray = {12};
+        //int[] intArray = {}
+        //int[] intArray = {};
 
 
         LList list = new LList();
 
-
-	    for (int i = 0; i < intArray.length; i++)
+        if (intArray.length > 0)
         {
-            list.add(intArray[i]);
+            for (int i = 0; i < intArray.length; i++)
+            {
+                list.add(intArray[i]);
+            }
+
+            list = list.mergeSort(list);
+
+            System.out.println("Sorted list: ");
+            list.traverse();
         }
 
-	    list = list.mergeSort(list);
-
-	    list.traverse();
+        else
+        {
+            System.out.println("intArray is empty.");
+        }
     }
 }
